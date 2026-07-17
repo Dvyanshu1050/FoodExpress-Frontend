@@ -9,7 +9,7 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Success from "./pages/Success";
 import MyOrders from "./pages/MyOrders";
-
+import Menu from "./pages/Menu";
 // Admin Pages
 import Dashboard from "./pages/admin/Dashboard";
 import Products from "./pages/admin/Products";
@@ -35,6 +35,8 @@ function App() {
 
       <Route path="/register" element={<Register />} />
 
+ <Route path="/menu" element={<Menu />} />
+ 
       {/* Product Details public hi rahega */}
       <Route path="/product/:id" element={<ProductDetails />} />
 
@@ -136,6 +138,8 @@ function App() {
           </AdminRoute>
         }
       />
+
+     
 
     </Routes>
   );
