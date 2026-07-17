@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useCart } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import axios from "axios";
+import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 
 
@@ -55,15 +55,11 @@ const [loading, setLoading] = useState(false);
       paymentMethod: formData.paymentMethod,
     };
 
-    const res = await axios.post(
-      "http://localhost:5000/api/orders",
-      orderData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const res = await api.post("/orders", orderData, {
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+});
 
     alert(res.data.message);
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../../services/api";
 import AdminLayout from "../../components/admin/AdminLayout";
 import { useAuth } from "../../context/AuthContext";
 const Orders = () => {
@@ -12,14 +12,11 @@ const fetchOrders = async () => {
   try {
     setLoading(true);
 
-    const res = await axios.get(
-      "http://localhost:5000/api/orders",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const res = await api.get("/orders", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     setOrders(res.data.orders);
 
@@ -39,8 +36,8 @@ useEffect(() => {
 
 const updateStatus = async (id, status) => {
   try {
-    await axios.put(
-      `http://localhost:5000/api/orders/${id}`,
+    await api.put(
+      `/orders/${id}`,
       { status },
       {
         headers: {
@@ -58,23 +55,16 @@ const updateStatus = async (id, status) => {
 
 
 const deleteOrder = async (id) => {
-
-  const ok = window.confirm(
-    "Delete this order?"
-  );
+  const ok = window.confirm("Delete this order?");
 
   if (!ok) return;
 
   try {
-
-    await axios.delete(
-      `http://localhost:5000/api/orders/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    await api.delete(`/orders/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     fetchOrders();
 

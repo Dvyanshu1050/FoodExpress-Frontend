@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../../services/api";
 import AdminLayout from "../../components/admin/AdminLayout";
 import { useAuth } from "../../context/AuthContext";
 
@@ -18,14 +18,11 @@ const [loading, setLoading] = useState(true);
 
 const fetchDashboard = async () => {
   try {
-    const res = await axios.get(
-      "http://localhost:5000/api/dashboard",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const res = await api.get("/dashboard", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     setStats(res.data);
   } catch (error) {
