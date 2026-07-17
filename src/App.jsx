@@ -20,7 +20,7 @@ import Users from "./pages/admin/Users";
 
 // Routes
 import AdminRoute from "./components/AdminRoute";
-import ProtectedRoute from "./components/ProtectedRoute"; // ✅ ADD
+import ProtectedRoute from "./components/ProtectedRoute"; 
 import CategoryProducts from "./pages/CategoryProducts";
 
 function App() {
