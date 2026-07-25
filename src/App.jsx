@@ -24,9 +24,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import CategoryProducts from "./pages/CategoryProducts";
 
 function App() {
-  console.log("App Loaded");
-console.log(import.meta.env);
-console.log(import.meta.env.VITE_API_URL);
+
   return (
     <Routes>
 

@@ -1,4 +1,5 @@
-import { FaBell, FaUserCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { FaBell, FaUserCircle, FaHome } from "react-icons/fa";
 import { useAuth } from "../../context/AuthContext";
 
 const AdminNavbar = () => {
@@ -7,8 +8,16 @@ const AdminNavbar = () => {
   return (
     <header className="flex items-center justify-between bg-white px-8 py-4 shadow-md">
       {/* Left */}
-      <div>
-        <h1 className="text-2xl font-bold text-orange-500">
+      <div className="flex items-center gap-4">
+        <Link
+          to="/"
+          className="flex items-center gap-2 rounded-lg bg-orange-500 px-4 py-2 text-white transition hover:bg-orange-600"
+        >
+          <FaHome />
+          Home
+        </Link>
+
+        <h1 className="text-3xl font-bold text-orange-500">
           Restaurant Dashboard
         </h1>
       </div>
@@ -37,7 +46,7 @@ const AdminNavbar = () => {
               {user?.name || "Admin"}
             </p>
 
-            <p className="text-sm text-gray-500">
+            <p className="text-sm capitalize text-gray-500">
               {user?.role || "admin"}
             </p>
           </div>

@@ -37,7 +37,7 @@ const OfferSlider = ({ offers = [] }) => {
             disableOnInteraction: false,
           }}
           pagination={{ clickable: true }}
-          loop={offers.length > 1}
+          loop={offers.length > 4}
           spaceBetween={25}
           breakpoints={{
             0: {

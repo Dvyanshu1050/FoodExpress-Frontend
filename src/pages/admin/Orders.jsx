@@ -46,8 +46,13 @@ const updateStatus = async (id, status) => {
       }
     );
 
-    fetchOrders();
-
+    setOrders((prev) =>
+      prev.map((order) =>
+        order._id === id
+          ? { ...order, status }
+          : order
+      )
+    );
   } catch (error) {
     console.log(error);
   }
@@ -104,9 +109,19 @@ const deleteOrder = async (id) => {
           {orders.map((order) => (
 
             <div
-              key={order._id}
-              className="rounded-xl bg-white p-6 shadow"
-            >
+  key={order._id}
+  className={`rounded-2xl p-6 shadow-lg border transition-all hover:shadow-xl ${
+    order.status === "Delivered"
+      ? "bg-green-50 border-green-300"
+      : order.status === "Cancelled"
+      ? "bg-red-50 border-red-300"
+      : order.status === "Preparing"
+      ? "bg-blue-50 border-blue-300"
+      : order.status === "Out For Delivery"
+      ? "bg-purple-50 border-purple-300"
+      : "bg-yellow-50 border-yellow-300"
+  }`}
+>
 
               {/* Header */}
 
@@ -128,38 +143,37 @@ const deleteOrder = async (id) => {
 
                 </div>
 
-                <div>
+                <div className="flex items-center gap-3">
+  <select
+    value={order.status}
+    onChange={(e) =>
+      updateStatus(order._id, e.target.value)
+    }
+    className="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-orange-500 focus:outline-none"
+  >
+    <option value="Pending">Pending</option>
+    <option value="Preparing">Preparing</option>
+    <option value="Out For Delivery">Out For Delivery</option>
+    <option value="Delivered">Delivered</option>
+    <option value="Cancelled">Cancelled</option>
+  </select>
 
-                  <select
-                    value={order.status}
-                    onChange={(e) =>
-                      updateStatus(
-                        order._id,
-                        e.target.value
-                      )
-                    }
-                    className="rounded border p-2"
-                  >
-
-                    <option>Pending</option>
-
-                    <option>Preparing</option>
-
-                    <option>
-                      Out For Delivery
-                    </option>
-
-                    <option>
-                      Delivered
-                    </option>
-
-                    <option>
-                      Cancelled
-                    </option>
-
-                  </select>
-
-                </div>
+  <span
+    className={`rounded-full px-4 py-2 text-xs font-bold text-white ${
+      order.status === "Delivered"
+        ? "bg-green-600"
+        : order.status === "Cancelled"
+        ? "bg-red-600"
+        : order.status === "Preparing"
+        ? "bg-blue-600"
+        : order.status === "Out For Delivery"
+        ? "bg-purple-600"
+        : "bg-yellow-500"
+    }`}
+  >
+    {order.status}
+  </span>
+</div>
 
               </div>
 
