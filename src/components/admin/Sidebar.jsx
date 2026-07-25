@@ -38,23 +38,23 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="w-64 min-h-screen bg-slate-900 text-white shadow-xl">
+    <aside className="flex h-screen w-64 shrink-0 flex-col bg-slate-900 text-white shadow-lg">
       {/* Logo */}
       <div className="border-b border-slate-700 p-6">
-        <h1 className="text-2xl font-bold text-center text-orange-400">
+        <h1 className="text-center text-2xl font-bold text-orange-400">
           🍔 Food Admin
         </h1>
       </div>
 
       {/* Menu */}
-      <nav className="mt-6 flex flex-col gap-2 px-3">
+      <nav className="flex-1 space-y-2 overflow-y-auto px-3 py-6">
         {menuItems.map((item) => (
           <NavLink
             key={item.path}
             to={item.path}
             end={item.path === "/admin"}
             className={({ isActive }) =>
-              `flex items-center gap-3 rounded-lg px-4 py-3 transition-all duration-200 ${
+              `flex items-center gap-3 rounded-lg px-4 py-3 transition-colors duration-200 ${
                 isActive
                   ? "bg-orange-500 text-white"
                   : "text-gray-300 hover:bg-slate-800 hover:text-white"
@@ -68,8 +68,8 @@ const Sidebar = () => {
       </nav>
 
       {/* Logout */}
-      <div className="absolute bottom-0 w-64 border-t border-slate-700 p-4">
-        <button className="flex w-full items-center gap-3 rounded-lg px-4 py-3 text-red-400 transition hover:bg-red-500 hover:text-white">
+      <div className="border-t border-slate-700 p-4">
+        <button className="flex w-full items-center gap-3 rounded-lg px-4 py-3 text-red-400 transition-colors duration-200 hover:bg-red-500 hover:text-white">
           <FaSignOutAlt />
           Logout
         </button>

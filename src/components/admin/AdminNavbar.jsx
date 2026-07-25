@@ -1,53 +1,71 @@
 import { Link } from "react-router-dom";
-import { FaBell, FaUserCircle, FaHome } from "react-icons/fa";
+import {
+  FaBell,
+  FaUserCircle,
+  FaHome,
+  FaSearch,
+} from "react-icons/fa";
 import { useAuth } from "../../context/AuthContext";
 
 const AdminNavbar = () => {
   const { user } = useAuth();
 
   return (
-    <header className="flex items-center justify-between bg-white px-8 py-4 shadow-md">
+    <header className="sticky top-0 z-40 flex h-20 items-center justify-between border-b border-gray-200 bg-white/95 px-8 backdrop-blur-sm">
       {/* Left */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-6">
         <Link
           to="/"
-          className="flex items-center gap-2 rounded-lg bg-orange-500 px-4 py-2 text-white transition hover:bg-orange-600"
+          className="flex items-center gap-2 rounded-xl bg-orange-500 px-4 py-2 font-medium text-white shadow transition-all duration-200 hover:bg-orange-600 hover:shadow-lg"
         >
           <FaHome />
           Home
         </Link>
 
-        <h1 className="text-3xl font-bold text-orange-500">
-          Restaurant Dashboard
-        </h1>
+        <div>
+          <h1 className="text-2xl font-bold text-slate-800">
+            Restaurant Dashboard
+          </h1>
+
+          <p className="text-sm text-gray-500">
+            Welcome back 👋
+          </p>
+        </div>
       </div>
 
-      {/* Center */}
-      <div className="hidden md:block">
-        <input
-          type="text"
-          placeholder="Search..."
-          className="w-80 rounded-lg border border-gray-300 px-4 py-2 outline-none focus:border-orange-500"
-        />
+      {/* Search */}
+      <div className="hidden lg:flex">
+        <div className="flex items-center rounded-xl border border-gray-200 bg-gray-50 px-4 py-2 transition focus-within:border-orange-500 focus-within:bg-white">
+          <FaSearch className="mr-3 text-gray-400" />
+
+          <input
+            type="text"
+            placeholder="Search products..."
+            className="w-80 bg-transparent outline-none"
+          />
+        </div>
       </div>
 
       {/* Right */}
       <div className="flex items-center gap-6">
-        <button className="relative text-2xl text-gray-600 hover:text-orange-500">
-          <FaBell />
-          <span className="absolute -right-1 -top-1 h-2 w-2 rounded-full bg-red-500"></span>
+        {/* Notification */}
+        <button className="relative rounded-xl p-3 text-gray-600 transition hover:bg-orange-50 hover:text-orange-500">
+          <FaBell className="text-xl" />
+
+          <span className="absolute right-2 top-2 h-2.5 w-2.5 rounded-full bg-red-500"></span>
         </button>
 
-        <div className="flex items-center gap-2">
-          <FaUserCircle className="text-3xl text-orange-500" />
+        {/* Profile */}
+        <div className="flex items-center gap-3 rounded-xl border border-gray-200 bg-gray-50 px-3 py-2">
+          <FaUserCircle className="text-4xl text-orange-500" />
 
-          <div>
-            <p className="font-semibold">
+          <div className="leading-tight">
+            <p className="font-semibold text-slate-800">
               {user?.name || "Admin"}
             </p>
 
             <p className="text-sm capitalize text-gray-500">
-              {user?.role || "admin"}
+              {user?.role || "Administrator"}
             </p>
           </div>
         </div>
