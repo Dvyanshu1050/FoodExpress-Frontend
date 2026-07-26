@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import axios from "axios";
+import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 
 const MyOrders = () => {
@@ -10,26 +10,30 @@ const MyOrders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchOrders = async () => {
-    try {
+ const fetchOrders = async () => {
+  if (!token) {
+    setLoading(false);
+    return;
+  }
 
-      const res = await axios.get(
-        "http://localhost:5000/api/orders/my-orders",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+  try {
+    const res = await api.get("/orders/my-orders", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-      setOrders(res.data.orders);
+    console.log("Orders Response:", res.data);
 
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    setOrders(res.data.orders || []);
+  } catch (error) {
+    console.error("Fetch Orders Error:", error);
+
+    setOrders([]);
+  } finally {
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
     fetchOrders();
