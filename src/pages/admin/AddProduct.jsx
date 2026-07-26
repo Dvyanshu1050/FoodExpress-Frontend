@@ -23,8 +23,7 @@ const getCategories = async () => {
   try {
     const res = await api.get("/categories");
 
-    console.log("API Response:", res.data);
-    console.log("Categories:", res.data.categories);
+
 
     setCategories(res.data.categories);
 

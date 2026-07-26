@@ -3,17 +3,21 @@ import AdminNavbar from "./AdminNavbar";
 
 const AdminLayout = ({ children }) => {
   return (
-    <div className="flex h-screen overflow-hidden bg-gray-100">
-      {/* Sidebar */}
-      <Sidebar />
+    <div className="bg-gray-100">
+      {/* Fixed Sidebar */}
+      <div className="fixed left-0 top-0 h-screen w-64">
+        <Sidebar />
+      </div>
 
-      {/* Main Section */}
-      <div className="flex flex-1 flex-col overflow-hidden">
-        {/* Navbar */}
-        <AdminNavbar />
+      {/* Right Side */}
+      <div className="ml-64">
+        {/* Fixed Navbar */}
+        <div className="fixed left-64 right-0 top-0 z-40 h-20">
+          <AdminNavbar />
+        </div>
 
-        {/* Scrollable Page Content */}
-        <main className="flex-1 overflow-y-auto p-6">
+        {/* Scrollable Content */}
+        <main className="mt-20 min-h-screen p-6">
           {children}
         </main>
       </div>

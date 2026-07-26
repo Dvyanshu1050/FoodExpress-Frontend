@@ -6,17 +6,17 @@ const Users = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchUsers = async () => {
-    try {
-      const res = await api.get("/users");
-         
-      setUsers(res.data);
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+ const fetchUsers = async () => {
+  try {
+    const res = await api.get("/users");
+
+    setUsers(res.data.users);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
     fetchUsers();
